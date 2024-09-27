@@ -1,6 +1,24 @@
 #include <iostream>
 #include <cmath>
 #include <vector>
+
+int _findDivisors(int n)
+{
+    int sum = 1;
+
+    for (int i = 2; i * i <= n; i++)
+    {
+        if (n % i == 0)
+        {
+            if (i * i == n)
+                sum += i;
+            else
+                sum += i + n / i;
+        }
+    }
+    return sum;
+}
+
 bool isArmstrong(int num)
 {
     int originalNum = num;
@@ -51,18 +69,7 @@ bool isExcess(int num)
     if (num < 2)
         return false;
 
-    int sum = 1;
-
-    for (int i = 2; i * i <= num; i++)
-    {
-        if (num % i == 0)
-        {
-            if (i * i == num)
-                sum += i;
-            else
-                sum += i + num / i;
-        }
-    }
+    int sum = _findDivisors(num);
 
     return sum > num;
 }
@@ -72,22 +79,10 @@ bool isFriendly(int bigger_num, int smaller_num)
     if (bigger_num < 2)
         return false;
 
-    int sum = 1;
-    for (int i = 2; i * i <= bigger_num; i++)
-    {
-        if (bigger_num % i == 0)
-        {
-            if (bigger_num % i == 0)
-            {
-                if (i * i == bigger_num)
-                    sum += i;
-                else
-                    sum += i + bigger_num / i;
-            }
-        }
-    }
+    int bigger_num_divisors_sum = _findDivisors(bigger_num);
+    int smaller_num_divisors_sum = _findDivisors(smaller_num);
 
-    return sum == smaller_num;
+    return bigger_num_divisors_sum == smaller_num && smaller_num_divisors_sum == bigger_num;
 }
 
 int main()
@@ -110,9 +105,12 @@ int main()
             std::cout << i << " ";
 
     std::cout << "\n\nДружественные числа до " << n << ":" << std::endl;
-    for (int i = 2; i <= n; i++)
-        if (isFriendly(n, i))
-            std::cout << i << " ";
+    for (int i = 3; i <= n; i++)
+    {
+        for (int j = 2; j < i; ++j)
+            if (isFriendly(i, j))
+                std::cout << i << "," << j << "; ";
+    }
 
     return 0;
 }
