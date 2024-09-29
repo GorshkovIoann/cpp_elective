@@ -23,10 +23,10 @@ void heapify(std::vector<int> &vec, const int n, const int i)
 
 void heapSort(std::vector<int> &vec)
 {
-    for (int i = std::size(vec) / 2 - 1; i >= 0; i--)
+    for (auto i = std::size(vec) / 2 - 1; i >= 0; i--)
         heapify(vec, std::size(vec), i);
 
-    for (int i = std::size(vec) - 1; i > 0; i--)
+    for (auto i = std::size(vec) - 1; i > 0; i--)
     {
         std::swap(vec[0], vec[i]);
 

@@ -10,7 +10,7 @@ size_t unique(std::vector<int> &vec)
     return end;
 }
 
-void printVector(const std::vector<int> &vec, int end)
+void printVector(const std::vector<int> &vec, const int end)
 {
     for (int i = 0; i < end; ++i)
     {
@@ -24,7 +24,7 @@ int main()
     std::vector<int> numbers = {1, 2, 2, 3, 4, 4, 4, 4, 4, 4, 5, 6, 6, 7};
 
     std::cout << "Было: ";
-    printVector(numbers, numbers.size());
+    printVector(numbers, std::size(numbers));
 
     int newEnd = unique(numbers);
 

@@ -3,7 +3,7 @@
 
 void shellSort(std::vector<int> &vec)
 {
-    for (int gap = vec.size() / 2; gap > 0; gap /= 2)
+    for (int gap = std::size(vec) / 2; gap > 0; gap /= 2)
     {
         for (int i = gap; i < std::size(vec); i++)
         {
