@@ -8,33 +8,22 @@
 #include <vector>
 #include <string>
 
-struct Tower
-{
-    int towerNumber;
-    size_t disksNumber;
-    Tower(int t_number, size_t d_number) : towerNumber{t_number}, disksNumber{d_number} {};
-};
-
-void HanoiTowers(int disksNumber, Tower &fromTower, Tower &toTower, Tower &intermediateTower)
+void HanoiTowers(int disksNumber, int fromTower, int toTower)
 {
 
     if (disksNumber != 0)
     {
-        HanoiTowers(disksNumber - 1, fromTower, intermediateTower, toTower);
+        int intermediateTower = 6 - fromTower - toTower;
+        HanoiTowers(disksNumber - 1, fromTower, intermediateTower);
 
-        std::cout << "Передвиньте диск с башни " << fromTower.towerNumber
-                  << " на башню " << toTower.towerNumber << std::endl;
-        --fromTower.disksNumber;
-        ++toTower.disksNumber;
+        std::cout << "Передвиньте диск с башни " << fromTower
+                  << " на башню " << toTower << std::endl;
 
-        HanoiTowers(disksNumber - 1, intermediateTower, toTower, fromTower);
+        HanoiTowers(disksNumber - 1, intermediateTower, toTower);
     }
 }
 
 int main()
 {
-    Tower tower1 = Tower(1, 3);
-    Tower tower2 = Tower(2, 0);
-    Tower tower3 = Tower(3, 0);
-    HanoiTowers(tower1.disksNumber, tower1, tower3, tower2);
+    HanoiTowers(3, 1, 3);
 }

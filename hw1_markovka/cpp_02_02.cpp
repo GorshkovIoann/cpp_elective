@@ -74,15 +74,18 @@ bool isExcess(int num)
     return sum > num;
 }
 
-bool isFriendly(int bigger_num, int smaller_num)
+int isFriendly(int bigger_num)
 {
     if (bigger_num < 2)
         return false;
 
     int bigger_num_divisors_sum = _findDivisors(bigger_num);
-    int smaller_num_divisors_sum = _findDivisors(smaller_num);
+    int smaller_num_divisors_sum = _findDivisors(bigger_num_divisors_sum);
 
-    return bigger_num_divisors_sum == smaller_num && smaller_num_divisors_sum == bigger_num;
+    if (smaller_num_divisors_sum == bigger_num && bigger_num > bigger_num_divisors_sum)
+        return bigger_num_divisors_sum;
+
+    return 0;
 }
 
 int main()
@@ -107,9 +110,9 @@ int main()
     std::cout << "\n\nДружественные числа до " << n << ":" << std::endl;
     for (int i = 3; i <= n; i++)
     {
-        for (int j = 2; j < i; ++j)
-            if (isFriendly(i, j))
-                std::cout << i << "," << j << "; ";
+        int friendly_num = isFriendly(i);
+        if (friendly_num)
+            std::cout << i << "," << friendly_num << "; ";
     }
 
     return 0;
