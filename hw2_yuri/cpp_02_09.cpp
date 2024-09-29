@@ -4,11 +4,11 @@
 void selectionSort(std::vector<int> &vec)
 {
 
-    for (int i = 0; i < vec.size() - 1; ++i)
+    for (int i = 0; i < std::size(vec) - 1; ++i)
     {
         int minIndex = i;
 
-        for (int j = i + 1; j < vec.size(); ++j)
+        for (int j = i + 1; j < std::size(vec); ++j)
         {
             if (vec[j] < vec[minIndex])
             {
@@ -22,7 +22,7 @@ void selectionSort(std::vector<int> &vec)
 
 void printVector(const std::vector<int> &vec)
 {
-    for (auto num : vec)
+    for (const auto &num : vec)
     {
         std::cout << num << " ";
     }

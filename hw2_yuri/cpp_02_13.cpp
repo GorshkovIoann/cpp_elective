@@ -4,7 +4,7 @@
 size_t unique(std::vector<int> &vec)
 {
     size_t end = 1;
-    for (size_t i = 1; i < vec.size(); ++i)
+    for (size_t i = 1; i < std::size(vec); ++i)
         if (vec[i] != vec[i - 1])
         {
             vec[end] = vec[i];
@@ -15,7 +15,7 @@ size_t unique(std::vector<int> &vec)
 
 void printVector(const std::vector<int> &vec, int end)
 {
-    for (auto i = 0; i < end; ++i)
+    for (int i = 0; i < end; ++i)
     {
         std::cout << vec[i] << " ";
     }

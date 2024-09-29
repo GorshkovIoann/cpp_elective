@@ -5,7 +5,7 @@ void shellSort(std::vector<int> &vec)
 {
     for (int gap = vec.size() / 2; gap > 0; gap /= 2)
     {
-        for (int i = gap; i < vec.size(); i++)
+        for (int i = gap; i < std::size(vec); i++)
         {
             int temp = vec[i];
             int j = i;
@@ -23,7 +23,7 @@ void shellSort(std::vector<int> &vec)
 
 void printVector(const std::vector<int> &vec)
 {
-    for (auto num : vec)
+    for (const auto &num : vec)
     {
         std::cout << num << " ";
     }

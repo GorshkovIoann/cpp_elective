@@ -1,11 +1,11 @@
 #include <iostream>
 #include <vector>
 
-void heapify(std::vector<int> &vec, int n, int i)
+void heapify(std::vector<int> &vec, const int n, const int i)
 {
     int largest = i;
-    int l = 2 * i + 1;
-    int r = 2 * i + 2;
+    const int l = 2 * i + 1;
+    const int r = 2 * i + 2;
 
     if (l < n && vec[l] > vec[largest])
         largest = l;
@@ -23,10 +23,10 @@ void heapify(std::vector<int> &vec, int n, int i)
 
 void heapSort(std::vector<int> &vec)
 {
-    for (int i = vec.size() / 2 - 1; i >= 0; i--)
-        heapify(vec, vec.size(), i);
+    for (int i = std::size(vec) / 2 - 1; i >= 0; i--)
+        heapify(vec, std::size(vec), i);
 
-    for (int i = vec.size() - 1; i > 0; i--)
+    for (int i = std::size(vec) - 1; i > 0; i--)
     {
         std::swap(vec[0], vec[i]);
 
@@ -36,7 +36,7 @@ void heapSort(std::vector<int> &vec)
 
 void printVector(const std::vector<int> &vec)
 {
-    for (auto num : vec)
+    for (const auto &num : vec)
     {
         std::cout << num << " ";
     }
