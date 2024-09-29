@@ -6,10 +6,7 @@ size_t unique(std::vector<int> &vec)
     size_t end = 1;
     for (size_t i = 1; i < std::size(vec); ++i)
         if (vec[i] != vec[i - 1])
-        {
-            vec[end] = vec[i];
-            ++end;
-        }
+            vec[end++] = vec[i];
     return end;
 }
 
