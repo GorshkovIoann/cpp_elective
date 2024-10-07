@@ -2,19 +2,20 @@
 
 class A
 {
-    virtual void test1() {}
+public:
+    virtual ~A() = default;
 };
 class B : public A
 {
-    virtual void test2() {}
 };
-class C : public A
+class C
 {
-    virtual void test3() {}
 };
 class D : public B
 {
-    virtual void test4() {}
+};
+class F : public B, public C
+{
 };
 
 int main()
@@ -23,9 +24,21 @@ int main()
     A *pA = new D(); // успешно расширили экземпляр D до A
     std::cout << (dynamic_cast<B *>(pA) ? "успех" : "неудача") << std::endl;
 
-    std::cout << (dynamic_cast<C *>(pA) ? "неудача" : "успех") << std::endl;
+    std::cout << (dynamic_cast<C *>(pA) ? "успех" : "неудача") << std::endl;
 
-    std::cout << (dynamic_cast<C *>(new B()) ? "успех" : "неудача") << std::endl;
+    std::cout << (dynamic_cast<D *>(pA) ? "успех" : "неудача") << std::endl;
 
-    std::cout << (dynamic_cast<C *>(new A()) ? "успех" : "неудача") << std::endl;
+    delete pA;
+
+    F *pf = new F();
+
+    std::cout << (dynamic_cast<C *>(pf) ? "успех" : "неудача") << std::endl;
+
+    std::cout << (dynamic_cast<B *>(pf) ? "успех" : "неудача") << std::endl;
+
+    std::cout << (dynamic_cast<A *>(pf) ? "успех" : "неудача") << std::endl;
+
+    std::cout << (dynamic_cast<D *>(pf) ? "успех" : "неудача") << std::endl;
+
+    delete pf;
 }

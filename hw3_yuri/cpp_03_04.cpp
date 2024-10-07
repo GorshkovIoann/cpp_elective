@@ -3,21 +3,21 @@
 class Grandma
 {
 public:
-    virtual void foo() = 0;
+    virtual void foo() const = 0;
 };
 
 class Grandpa
 {
 public:
-    virtual void foo() = 0;
+    virtual void foo() const = 0;
 };
 
 class Mom : public Grandpa
 {
 public:
-    virtual void fooGrandpa() = 0;
+    virtual void fooGrandpa() const = 0;
 
-    void foo() override final
+    void foo() const override final
     {
         fooGrandpa();
     }
@@ -26,9 +26,9 @@ public:
 class Dad : public Grandma
 {
 public:
-    virtual void fooGrandma() = 0;
+    virtual void fooGrandma() const = 0;
 
-    void foo() override final
+    void foo() const override final
     {
         fooGrandma();
     }
@@ -37,12 +37,12 @@ public:
 class Me : public Mom, public Dad
 {
 public:
-    void fooGrandma() override final
+    void fooGrandma() const override final
     {
         std::cout << "Похож на бабушку" << std::endl;
     }
 
-    void fooGrandpa() override final
+    void fooGrandpa() const override final
     {
         std::cout << "Похож на дедушку" << std::endl;
     }
@@ -53,7 +53,7 @@ int main()
     Me i;
 
     Grandma *m = &i;
-    m->foo(); 
+    m->foo();
 
     Grandpa *p = &i;
     p->foo();
