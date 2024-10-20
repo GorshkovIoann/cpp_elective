@@ -1,10 +1,11 @@
 #include <algorithm>
 #include <iostream>
 
+template <typename T>
 class Container
 {
 private:
-    int *m_data;
+    T *m_data;
     std::size_t m_size;
     std::size_t m_capacity;
 
@@ -13,12 +14,12 @@ public:
 
     Container(std::size_t size) : m_size(size), m_capacity(size)
     {
-        m_data = new int[m_capacity]{};
+        m_data = new T[m_capacity]{};
     }
 
     Container(const Container &other) : m_size(other.m_size), m_capacity(other.m_capacity)
     {
-        m_data = new int[m_capacity];
+        m_data = new T[m_capacity];
         std::copy_n(other.m_data, m_size, m_data);
     }
 
@@ -46,7 +47,7 @@ public:
         swap(m_capacity, other.m_capacity);
     }
 
-    int &front()
+    T &front()
     {
         if (!m_size)
         {
@@ -54,7 +55,7 @@ public:
         }
         return m_data[0];
     }
-    int &front() const
+    T &front() const
     {
         if (!m_size)
         {
@@ -63,7 +64,7 @@ public:
         return m_data[0];
     }
 
-    int &back()
+    T &back()
     {
         if (!m_size)
         {
@@ -71,7 +72,7 @@ public:
         }
         return m_data[m_size - 1];
     }
-    int &back() const
+    T &back() const
     {
         if (!m_size)
         {
@@ -80,8 +81,8 @@ public:
         return m_data[m_size - 1];
     }
 
-    int &operator[](std::size_t index) { return m_data[index]; }
-    int &operator[](std::size_t index) const { return m_data[index]; }
+    T &operator[](std::size_t index) { return m_data[index]; }
+    T &operator[](std::size_t index) const { return m_data[index]; }
 
     std::size_t size() const { return m_size; }
     std::size_t capacity() const { return m_capacity; }
@@ -90,7 +91,7 @@ public:
 
     void clear() { m_size = 0; }
 
-    void push_back(int value)
+    void push_back(T value)
     {
         if (m_size == m_capacity)
         {
@@ -105,7 +106,7 @@ private:
         if (new_capacity <= m_capacity)
             return;
 
-        int *new_data = new int[new_capacity];
+        T *new_data = new T[new_capacity];
         std::copy_n(m_data, m_size, new_data);
         delete[] m_data;
         m_data = new_data;

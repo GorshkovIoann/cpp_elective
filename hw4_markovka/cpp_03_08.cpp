@@ -88,6 +88,31 @@ public:
         }
         return false;
     }
+
+    friend bool operator>(const IPv4 &lhs, const IPv4 &rhs)
+    {
+        return rhs < lhs;
+    }
+
+    friend bool operator==(const IPv4 &lhs, const IPv4 &rhs)
+    {
+        return !(rhs < lhs && rhs > lhs);
+    }
+
+    friend bool operator!=(const IPv4 &lhs, const IPv4 &rhs)
+    {
+        return (rhs < lhs && rhs > lhs);
+    }
+
+    friend bool operator>=(const IPv4 &lhs, const IPv4 &rhs)
+    {
+        return lhs > rhs || lhs == rhs;
+    }
+
+    friend bool operator<=(const IPv4 &lhs, const IPv4 &rhs)
+    {
+        return rhs > lhs || lhs == rhs;
+    }
 };
 
 int main()

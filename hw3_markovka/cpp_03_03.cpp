@@ -1,5 +1,6 @@
 #include <iostream>
 #include <numbers>
+#include <vector>
 
 class Shape
 {
@@ -13,26 +14,26 @@ public:
 class Polygon : public Shape
 {
 protected:
-    double sideA, sideB;
+    std::vector<double> sides;
 
 public:
-    Polygon(double a, double b) : sideA{a}, sideB{b} {}
+    Polygon(std::vector<double> s) : sides{s} {}
 };
 
 class Rectangle : public Polygon
 {
 
 public:
-    Rectangle(double w, double h) : Polygon(w, h) {}
+    Rectangle(double w, double h) : Polygon({w, h}) {}
 
     double area() const override
     {
-        return sideA * sideB;
+        return sides[0] * sides[1];
     }
 
     double perimeter() const override
     {
-        return 2 * (sideA + sideB);
+        return 2 * (sides[0] + sides[1]);
     }
 };
 
@@ -44,21 +45,18 @@ public:
 
 class Triangle : public Polygon
 {
-private:
-    double sideC;
-
 public:
-    Triangle(double a, double b, double c) : Polygon(a, b), sideC{c} {}
+    Triangle(double a, double b, double c) : Polygon({a, b, c}) {}
 
     double perimeter() const override
     {
-        return sideA + sideB + sideC;
+        return sides[0] + sides[1] + sides[2];
     }
 
     double area() const override
     {
         double p = perimeter() / 2;
-        return sqrt(p * (p - sideA) * (p - sideB) * (p - sideC));
+        return sqrt(p * (p - sides[0]) * (p - sides[1]) * (p - sides[2]));
     }
 };
 
