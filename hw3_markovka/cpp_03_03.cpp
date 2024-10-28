@@ -56,7 +56,7 @@ public:
     double area() const override
     {
         double p = perimeter() / 2;
-        return sqrt(p * (p - sides[0]) * (p - sides[1]) * (p - sides[2]));
+ //       return sqrt(p * (p - sides[0]) * (p - sides[1]) * (p - sides[2]));
     }
 };
 

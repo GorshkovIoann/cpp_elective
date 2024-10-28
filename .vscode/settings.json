@@ -60,6 +60,9 @@
     "algorithm": "cpp",
     "array": "cpp",
     "optional": "cpp",
-    "sstream": "cpp"
+    "sstream": "cpp",
+    "numeric": "cpp",
+    "ranges": "cpp",
+    "span": "cpp"
   }
 }

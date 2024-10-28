@@ -9,7 +9,7 @@ private:
     std::size_t m_capacity;
 
 public:
-    Container() : m_size(0), m_capacity(0) {}
+    Container() : m_size(0), m_capacity(0), m_data(nullptr) {}
 
     Container(std::size_t size) : m_size(size), m_capacity(size)
     {
@@ -54,7 +54,7 @@ public:
         }
         return m_data[0];
     }
-    int &front() const
+    const int &front() const
     {
         if (!m_size)
         {
@@ -71,7 +71,7 @@ public:
         }
         return m_data[m_size - 1];
     }
-    int &back() const
+    const int &back() const
     {
         if (!m_size)
         {
@@ -81,7 +81,7 @@ public:
     }
 
     int &operator[](std::size_t index) { return m_data[index]; }
-    int &operator[](std::size_t index) const { return m_data[index]; }
+    const int &operator[](std::size_t index) const { return m_data[index]; }
 
     std::size_t size() const { return m_size; }
     std::size_t capacity() const { return m_capacity; }
@@ -90,7 +90,16 @@ public:
 
     void clear() { m_size = 0; }
 
-    void push_back(int value)
+    void push_back(int&& value)
+    {
+        if (m_size == m_capacity)
+        {
+            reserve(m_capacity * 2);
+        }
+        m_data[m_size++] = std::move(value);
+    }
+
+    void push_back(const int& value)
     {
         if (m_size == m_capacity)
         {
@@ -99,7 +108,6 @@ public:
         m_data[m_size++] = value;
     }
 
-private:
     void reserve(std::size_t new_capacity)
     {
         if (new_capacity <= m_capacity)

@@ -1,62 +1,41 @@
-#include <iostream>
-#include <vector>
+#include <algorithm>
+#include <cassert>
+#include <iterator>
+#include <numeric>
 
-template <typename T>
-void heapify(std::vector<T> &vec, const int n, const int i)
+template<typename T>
+[[nodiscard]] const T* binary_search(const T* array, std::size_t size, const T& key)
 {
-    int largest = i;
-    const int l = 2 * i + 1;
-    const int r = 2 * i + 2;
-
-    if (l < n && vec[l] > vec[largest])
-        largest = l;
-
-    if (r < n && vec[r] > vec[largest])
-        largest = r;
-
-    if (largest != i)
+    if (size > 0)
     {
-        std::swap(vec[i], vec[largest]);
-
-        heapify(vec, n, largest);
+        std::size_t l = 0, r = size - 1, m{};
+        
+        while (l < r)
+        {       
+            array[m = std::midpoint(l, r)] < key ? l = m + 1 : r = m;
+        }
+        
+        return (array[l] == key ? array + l : nullptr);
+    }
+    else
+    {
+        return nullptr;
     }
 }
 
-template <typename T>
-void heapSort(std::vector<T> &vec)
-{
-    for (int i = std::size(vec) / 2 - 1; i >= 0; i--)
-        heapify(vec, std::size(vec), i);
-
-    for (int i = std::size(vec) - 1; i > 0; i--)
-    {
-        std::swap(vec[0], vec[i]);
-
-        heapify(vec, i, 0);
-    }
-}
-template <typename T>
-void printVector(const std::vector<T> &vec)
-{
-    for (const auto &num : vec)
-    {
-        std::cout << num << " ";
-    }
-    std::cout << std::endl;
-}
+//  ================================================================================================
 
 int main()
 {
-    std::vector<double> numbers = {-12., 1000., 43., 3., 21., 12., 2., 2., 2., -56.};
+    const std::size_t size = 5;
 
-    std::cout << "Было: ";
-    printVector(numbers);
+    const int array[size] { 1, 2, 3, 4, 5 };
 
-    heapSort(numbers);
+    assert(binary_search(array, size, 1) == array + 0);
+    assert(binary_search(array, size, 2) == array + 1);
+    assert(binary_search(array, size, 3) == array + 2);
+    assert(binary_search(array, size, 4) == array + 3);
+    assert(binary_search(array, size, 5) == array + 4);
 
-    std::cout << "Стало: ";
-    printVector(numbers);
-
-    std::cout << "Профит" << std::endl;
     return 0;
 }
