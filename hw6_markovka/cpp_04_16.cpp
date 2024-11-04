@@ -74,7 +74,7 @@ namespace detail // demo
 	{
 		template < typename T, typename ... Ts > requires (N < sizeof...(Ts) + 1)
 
-		[[nodiscard]] static constexpr const auto & apply(const Tuple < T, Ts ...> & tuple)
+		[[nodiscard]] static constexpr auto & apply(Tuple < T, Ts ...> & tuple)
 		{
 			return Get < N - 1 > ::apply(tuple.tail());
 		}
@@ -85,7 +85,7 @@ namespace detail // demo
 	{
 		template < typename T, typename ... Ts >
 
-		[[nodiscard]] static constexpr const auto & apply(const Tuple < T, Ts ... > & tuple)
+		[[nodiscard]] static constexpr auto & apply(Tuple < T, Ts ... > & tuple)
 		{
 			return tuple.head();
 		}
@@ -95,10 +95,10 @@ namespace detail // demo
 } // namespace detail
 
 //  ================================================================================================
-//скажем нет константности
+
 template < std::size_t N, typename ... Ts > requires (N < sizeof...(Ts))
 
-[[nodiscard]] inline constexpr auto & get(const Tuple < Ts ... > & tuple)
+[[nodiscard]] inline constexpr auto & get(Tuple < Ts ... > & tuple)
 {
 	return detail::Get < N > ::apply(tuple);
 }
@@ -176,26 +176,13 @@ inline std::ostream & operator<<(std::ostream & stream, const Tuple < Ts ... > &
 
 int main()
 {
-	constexpr auto tuple_1 = make_tuple('a', 42, 3.14);
-	constexpr auto tuple_2 = make_tuple('a', 42, 2.72);
+	auto tuple_1 = make_tuple('a', 42, 3.14);
 
-//  ================================================================================================
-
-	static_assert(get < 0 > (tuple_1) == get < 0 > (tuple_2));
-
-//  ================================================================================================
-
-	static_assert((tuple_1 <  tuple_2) == false);
-    static_assert((tuple_1 >  tuple_2)         );
-    static_assert((tuple_1 <= tuple_2) == false);
-    static_assert((tuple_1 >= tuple_2)         );
-    static_assert((tuple_1 == tuple_2) == false);
-    static_assert((tuple_1 != tuple_2)         );
-
-//  ================================================================================================
-
+    get <0>(tuple_1) = 'v';
 	std::cout << tuple_1 << std::endl;
-	std::cout << tuple_2 << std::endl;
+	
+	get <1>(tuple_1) = 112;
+	std::cout << tuple_1 << std::endl;
 
 	return 0;
 }

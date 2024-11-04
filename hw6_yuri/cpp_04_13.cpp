@@ -10,7 +10,7 @@ struct decay {
         //удалили ссылку
     
     public:
-        typedef typename std::conditional<       //условия
+        using type = typename std::conditional<       //условия
             std::is_array<U>::value,             //если массив
             typename std::add_pointer<typename std::remove_extent<U>::type>::type,
                                                  // добавили указательна член и удалили размер
@@ -19,7 +19,7 @@ struct decay {
                 typename std::add_pointer<U>::type, // добавили указатель если да
                 typename std::remove_cv<U>::type    // удалили всякие константы если нет
             >::type
-        >::type type; //вытащили тип того что получилось
+        >::type; //вытащили тип того что получилось
 };
 
 template<typename T>

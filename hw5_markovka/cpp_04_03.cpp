@@ -5,7 +5,7 @@ template <typename T>
 class Container
 {
 private:
-    T *m_data;
+    T *m_data = nullptr;
     std::size_t m_size;
     std::size_t m_capacity;
 
@@ -104,7 +104,7 @@ public:
     {
         if (m_size == m_capacity)
         {
-            reserve(m_capacity * 2);
+            reserve(m_capacity * 2 + 1);
         }
         m_data[m_size++] = std::move(value);
     }
@@ -121,3 +121,47 @@ public:
         m_capacity = new_capacity;
     }
 };
+
+int main() {
+    Container<int> container;
+
+    std::cout << "Container is empty: " << std::boolalpha << container.empty() << std::endl;
+
+    container.push_back(1);
+    container.push_back(20);
+    container.push_back(30);
+    container.push_back(-5);
+
+    std::cout << "Size: " << container.size() << ", Capacity: " << container.capacity() << std::endl;
+
+    std::cout << "Front: " << container.front() << std::endl;
+    std::cout << "Back: " << container.back() << std::endl;
+
+    container[1] = 25;
+    std::cout << "Updated second element: " << container[1] << std::endl;
+
+    container.clear();
+    std::cout << "Container cleared. Size: " << container.size() << std::endl;
+    std::cout << "Container is empty: " << std::boolalpha << container.empty() << std::endl;
+
+    container.push_back(40);
+    container.push_back(50);
+    container.push_back(60);
+    container.push_back(30);
+
+
+    std::cout << "Size after adding more elements: " << container.size() << ", Capacity: " << container.capacity() << std::endl;
+    std::cout << "Elements in the container: ";
+    for (std::size_t i = 0; i < container.size(); ++i) {
+        std::cout << container[i] << " ";
+    }
+    std::cout << std::endl;
+
+    container.reserve(10);
+    std::cout << "Capacity after reserving more space: " << container.capacity() << std::endl;
+
+    container.push_back(70);
+    container.push_back(80);
+    std::cout << "Size after adding more elements: " << container.size() << ", Capacity: " << container.capacity() << std::endl;
+        
+}
