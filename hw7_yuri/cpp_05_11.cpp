@@ -27,7 +27,7 @@ class Decorator : public Entity {
   explicit Decorator(Entity& entity) : m_entity(entity) {}
 
   void test() const override {
-    std::clog << "Decorated::";
+    std::clog << "DecoratedBaseMethod::";
     Entity::test();
   }
 

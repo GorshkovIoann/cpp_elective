@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\packard\Desktop\cpp_fakult_sem3\cpp_elective\hw8_marlovka\cpp_06_01\build\CMakeFiles\921807270b4bc3cea14f6571096042d7\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{E5454D49-C7AD-3812-AB93-00284BC6CA58}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

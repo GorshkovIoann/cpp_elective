@@ -1,0 +1,10 @@
+^C:\USERS\PACKARD\DESKTOP\CPP_FAKULT_SEM3\CPP_ELECTIVE\HW8_MARLOVKA\CPP_06_01\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/packard/Desktop/cpp_fakult_sem3/cpp_elective/hw8_marlovka/cpp_06_01 -BC:/Users/packard/Desktop/cpp_fakult_sem3/cpp_elective/hw8_marlovka/cpp_06_01/build --check-stamp-file C:/Users/packard/Desktop/cpp_fakult_sem3/cpp_elective/hw8_marlovka/cpp_06_01/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
