@@ -26,14 +26,17 @@ class Decorator : public Entity {
  public:
   explicit Decorator(Entity& entity) : m_entity(entity) {}
 
-  void test() const override {
-    std::clog << "DecoratedBaseMethod::";
-    Entity::test();
-  }
+  virtual void test() const = 0;
+    
 
  protected:
   Entity& m_entity;
 };
+
+void Decorator::test() const{
+  std::clog << "DecoratedBaseMethod::";
+    Entity::test();
+}
 
 //  ================================================================================================
 
@@ -60,14 +63,4 @@ int main() {
 
   delete entity_1;
   delete entity_2;
-
-  Entity* entity_3 = new Server();
-
-  Entity* entity_4 = new Decorator(*entity_3);
-
-  entity_3->test();
-  entity_4->test();
-
-  delete entity_3;
-  delete entity_4;
 }
